@@ -20,10 +20,13 @@ router.get("/:id",(req,res)=>{
     res.status(500).json({msg:"oh noes!",err})
    })
 })
+
+//TODO: protect this route so only logged in users can chirp
 router.post("/",(req,res)=>{
     console.log(req.body);
    Chirp.create({
     chirp:req.body.chirp,
+    //TODO: read userid from session data instead of from req.body
     UserId:req.body.UserId
    }).then(chirpData=>{
     res.json(chirpData)
@@ -32,5 +35,7 @@ router.post("/",(req,res)=>{
     res.status(500).json({msg:"oh noes!",err})
    })
 })
+
+//TODO: BONUS: add a protected route to delete a chirp (/api/chirps/:id) so that only the user who created the chirp can delete it
 
 module.exports = router;
