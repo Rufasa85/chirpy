@@ -11,6 +11,13 @@ router.get("/",(req,res)=>{
     res.status(500).json({msg:"oh noes!",err})
    })
 })
+
+router.get("/logout",(req,res)=>{
+    req.session.destroy();
+    res.send("logged out")
+})
+
+
 router.get("/:id",(req,res)=>{
    User.findByPk(req.params.id,{
     include:[Chirp]
@@ -58,5 +65,8 @@ router.post("/login",(req,res)=>{
     res.status(500).json({msg:"oh noes!",err})
    })
 })
+
+
+
 
 module.exports = router;
